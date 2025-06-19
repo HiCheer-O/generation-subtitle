@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  subtitle-aligner:
+    # arm 架构
+#    container_name: generation-subtitle-arm
+#    image: generation-subtitle-arm:latest
+    # amd 架构
+    container_name: generation-subtitle-amd
+    image: generation-subtitle-amd:latest
+    ports:
+      - "8090:8080"
+    volumes:
+      - ./app:/app                     # 本地 app 目录挂载到容器，代码可实时更新
+    environment:
+      - PYTHONIOENCODING=UTF-8
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: '2.0'
